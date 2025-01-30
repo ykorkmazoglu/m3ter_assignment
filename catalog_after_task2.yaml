@@ -2,7 +2,6 @@ Product:
   name: AWS Lambda API 2
   code: aws_lambda_api_2
   id: b0e80927-aba4-422a-a710-24cd4fd3ac2b
-
 Meter:
   productId: b0e80927-aba4-422a-a710-24cd4fd3ac2b
   name: Compute and Requests Meter API 2
@@ -23,7 +22,6 @@ Meter:
     unit: GB-seconds
     calculation: memory_consumption_api_2*execution_time_api_2
   id: 4998c4fa-ffbd-4595-b56c-1cd4b010b632
-
 Aggregation:
 - name: Total Number of Requests API 2
   code: total_number_of_requests_api_2
@@ -33,7 +31,7 @@ Aggregation:
   targetField: memory_consumption_api_2
   aggregation: COUNT
   meterId: 4998c4fa-ffbd-4595-b56c-1cd4b010b632
-  id: "77fdd8af-acc4-4b65-8c47-900e8d4d260a"
+  id: 77fdd8af-acc4-4b65-8c47-900e8d4d260a
 - name: Duration Aggregation API 2
   code: duration_aggregation_api_2
   rounding: NONE
@@ -42,53 +40,54 @@ Aggregation:
   targetField: duration_api_2
   aggregation: SUM
   meterId: 4998c4fa-ffbd-4595-b56c-1cd4b010b632
-  id: "ada2e2b3-afa2-4b3d-85b2-07caffecada2"
-
+  id: ada2e2b3-afa2-4b3d-85b2-07caffecada2
 PlanTemplate:
-  name: "Lambda Template API 2" #update
-  code: "lambda_template_api_2" #update
-  currency: "USD"
+  name: Lambda Template API 2
+  code: lambda_template_api_2
+  currency: USD
   standingCharge: 0.0
   billFrequencyInterval: 1
-  billFrequency: "MONTHLY"
-
+  billFrequency: MONTHLY
+  productId: b0e80927-aba4-422a-a710-24cd4fd3ac2b
+  id: ad7856cf-c600-4d17-8fd3-20fc223eca11
 Plan:
-  planTemplateId: null
-  name: "Lambda Plan API 2" #update
-  code: "lambda_plan_api_2" #update
-
+  planTemplateId: ad7856cf-c600-4d17-8fd3-20fc223eca11
+  name: Lambda Plan API 2
+  code: lambda_plan_api_2
+  id: 87bda8f7-347d-4b2e-98c0-e4bc960087df
 Pricing:
-  - aggregationId: null
-    planId: null
-    type: "DEBIT"
-    tiersSpanPlan: false
-    minimumSpend: 0.0
-    cumulative: true
-    startDate: "2024-11-01T00:00:00.000Z"
-    description: "Duration"
-    pricingBands:
-      - lowerLimit: 0.0
-        fixedPrice: 0.0
-        unitPrice: 0.00001833337
-      - lowerLimit: 6000000000
-        fixedPrice: 0.0
-        unitPrice: 0.0000165
-      - lowerLimit: 15000000000
-        fixedPrice: 0.0
-        unitPrice: 0.00001466674
-
-  - aggregationId: null
-    planId: null
-    type: "DEBIT"
-    tiersSpanPlan: false
-    minimumSpend: 0.0
-    cumulative: true
-    startDate: "2024-11-01T00:00:00.000Z"
-    description: "Requests"
-    pricingBands:
-      - lowerLimit: 0.0
-        fixedPrice: 0.0
-        unitPrice: 0.22
+- aggregationId: ada2e2b3-afa2-4b3d-85b2-07caffecada2
+  planId: 87bda8f7-347d-4b2e-98c0-e4bc960087df
+  type: DEBIT
+  tiersSpanPlan: false
+  minimumSpend: 0.0
+  cumulative: true
+  startDate: '2024-11-01T00:00:00.000Z'
+  description: Duration
+  pricingBands:
+  - lowerLimit: 0.0
+    fixedPrice: 0.0
+    unitPrice: 1.833337e-05
+  - lowerLimit: 6000000000
+    fixedPrice: 0.0
+    unitPrice: 1.65e-05
+  - lowerLimit: 15000000000
+    fixedPrice: 0.0
+    unitPrice: 1.466674e-05
+  id: 6b13c037-606e-45c1-b6fb-71758173599c
+- aggregationId: 77fdd8af-acc4-4b65-8c47-900e8d4d260a
+  planId: 87bda8f7-347d-4b2e-98c0-e4bc960087df
+  type: DEBIT
+  tiersSpanPlan: false
+  minimumSpend: 0.0
+  cumulative: true
+  startDate: '2024-11-01T00:00:00.000Z'
+  description: Requests
+  pricingBands:
+  - lowerLimit: 0.0
+    fixedPrice: 0.0
+    unitPrice: 0.22
+  id: 23fea231-307b-4e41-8018-4a1bc257b5c6
 
 # Task 3
 Customer:

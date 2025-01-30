@@ -45,6 +45,7 @@ class M3terApiClient:
             raise AuthenticationError(f"Authentication failed: {str(e)}") from e
         
 
+    # Task 1 
     def create_product(self, name: str, code: str, **kwargs) -> Dict[str, Any]:
         """
         Creates a product with optional additional fields.
@@ -137,3 +138,117 @@ class M3terApiClient:
             logger.error(f"Failed to create aggregation.\nStatus Code: {status_code}\nPayload: {payload}\nResponse: {error_content}\nError: {str(e)}")
             # Raise an exception with details
             raise Exception(f"Failed to create aggregation: {str(e)} (Status Code: {status_code})") from e
+
+    # Task 2
+    def create_plan_template(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Creates a plan template with the provided payload.
+        The payload must include required fields such as productId, name, currency, and code.
+        """
+        if not self.token:
+            raise Exception("Not authenticated. Call authenticate() first.")
+        
+        plan_template_url = f"{self.base_url}/organizations/{self.org_id}/plantemplates"
+        headers = {
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json"
+        }
+
+        try:
+            # Send the POST request to create a plan template
+            response = requests.post(plan_template_url, headers=headers, json=payload)
+            response.raise_for_status()
+
+            # Log and return the successful response
+            logger.info("Plan template created successfully: %s", response.json())
+            return response.json()
+
+        except requests.RequestException as e:
+
+            status_code = response.status_code if response else "N/A"
+            error_content = response.text if response else "No response content"
+
+            # Log error details
+            logger.error(
+                "Failed to create plan template.\n"
+                "Status Code: %s\nPayload: %s\nResponse: %s\nError: %s",
+                status_code, payload, error_content, str(e)
+            )
+            
+            # Raise an exception with details
+            raise Exception(f"Failed to create plan template: {str(e)} (Status Code: {status_code})") from e
+
+    def create_plan(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Creates a plan using the provided payload.
+        The payload must include required fields such as planTemplateId, name, and code.
+        """
+        if not self.token:
+            raise Exception("Not authenticated. Call authenticate() first.")
+        
+        plan_url = f"{self.base_url}/organizations/{self.org_id}/plans"
+        headers = {
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json"
+        }
+
+        try:
+            # Send the POST request to create a plan
+            response = requests.post(plan_url, headers=headers, json=payload)
+            response.raise_for_status()
+
+            # Log and return the successful response
+            logger.info("Plan created successfully: %s", response.json())
+            return response.json()
+
+        except requests.RequestException as e:
+
+            status_code = response.status_code if response else "N/A"
+            error_content = response.text if response else "No response content"
+
+            # Log error details
+            logger.error(
+                "Failed to create plan.\n"
+                "Status Code: %s\nPayload: %s\nResponse: %s\nError: %s",
+                status_code, payload, error_content, str(e)
+            )
+
+            # Raise an exception with details
+            raise Exception(f"Failed to create plan: {str(e)} (Status Code: {status_code})") from e
+
+    def create_pricing(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Creates a pricing configuration using the provided payload.
+        The payload must include required fields such as aggregationId, planId, type, and pricingBands.
+        """
+        if not self.token:
+            raise Exception("Not authenticated. Call authenticate() first.")
+
+        pricing_url = f"{self.base_url}/organizations/{self.org_id}/pricings"
+        headers = {
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json"
+        }
+
+        try:
+            # Send the POST request to create a pricing configuration
+            response = requests.post(pricing_url, headers=headers, json=payload)
+            response.raise_for_status()
+
+            # Log and return the successful response
+            logger.info("Pricing created successfully: %s", response.json())
+            return response.json()
+
+        except requests.RequestException as e:
+            status_code = response.status_code if response else "N/A"
+            error_content = response.text if response else "No response content"
+
+            # Log error details
+            logger.error(
+                "Failed to create pricing.\n"
+                "Status Code: %s\nPayload: %s\nResponse: %s\nError: %s",
+                status_code, payload, error_content, str(e)
+            )
+
+            # Raise an exception with details
+            raise Exception(f"Failed to create pricing: {str(e)} (Status Code: {status_code})") from e
