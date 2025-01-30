@@ -87,7 +87,6 @@ def task1 () -> None:
     except Exception as e:
         logger.error("Error: %s", e)
 
-
 def task2() -> None:
     try:
         # Load catalog data
@@ -144,9 +143,48 @@ def task2() -> None:
     except Exception as e:
         logger.error("Error: %s", e)
 
+def task3() -> None:
+    try:
+        # Load catalog data
+        with open("catalog_after_task2.yaml", "r") as file:
+            catalog = yaml.safe_load(file)
+        
+        # Initialize client
+        client = M3terApiClient(access_key=config.access_key, api_secret=config.api_secret, org_id=config.org_id)
+        # Authenticate
+        client.authenticate()
+
+        # Create Accounts and AccountPlans
+        # Extract the list of customers from the YAML
+        accounts = catalog["Account"]
+        catalog["AccountPlan"]["planId"] = catalog["Plan"]["id"]
+        account_plan_payload = catalog["AccountPlan"]
+
+        for account_payload in accounts:
+            # create account request
+            account_response = client.create_account(account_payload)
+            account_id = account_response.get("id")
+            account_payload["id"] = account_id
+            # create account plan request
+            account_plan_payload["accountId"] = account_id
+            client.create_account_plan(account_plan_payload)
+
+        with open("catalog_after_task3.yaml", "w") as file:
+            yaml.safe_dump(catalog, file, default_flow_style=False, sort_keys=False)
+
+        print('\n\n')
+        pprint(accounts)
+        print('\n\n')
+
+    except AuthenticationError as auth_err:
+        logger.error("Authentication Error: %s", auth_err)
+    except Exception as e:
+        logger.error("Error: %s", e)
+
 
 if __name__ == "__main__":
 
     # task1()
-    task2()
+    # task2()
+    task3()
     

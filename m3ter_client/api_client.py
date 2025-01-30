@@ -252,3 +252,78 @@ class M3terApiClient:
 
             # Raise an exception with details
             raise Exception(f"Failed to create pricing: {str(e)} (Status Code: {status_code})") from e
+
+    # Task 3
+    def create_account(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Creates an account using the provided payload.
+        The payload must include required fields such as name and code.
+        """
+        if not self.token:
+            raise Exception("Not authenticated. Call authenticate() first.")
+
+        account_url = f"{self.base_url}/organizations/{self.org_id}/accounts"
+        headers = {
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json"
+        }
+
+        try:
+            # Send the POST request to create an account
+            response = requests.post(account_url, headers=headers, json=payload)
+            response.raise_for_status()
+
+            # Log and return the successful response
+            logger.info("Account created successfully: %s", response.json())
+            return response.json()
+
+        except requests.RequestException as e:
+            status_code = response.status_code if response else "N/A"
+            error_content = response.text if response else "No response content"
+
+            # Log error details
+            logger.error(
+                "Failed to create account.\n"
+                "Status Code: %s\nPayload: %s\nResponse: %s\nError: %s",
+                status_code, payload, error_content, str(e)
+            )
+
+            # Raise an exception with details
+            raise Exception(f"Failed to create account: {str(e)} (Status Code: {status_code})") from e
+
+    def create_account_plan(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Creates an account plan using the provided payload.
+        The payload must include required fields such as accountId, planId, startDate.....
+        """
+        if not self.token:
+            raise Exception("Not authenticated. Call authenticate() first.")
+
+        account_plan_url = f"{self.base_url}/organizations/{self.org_id}/accountplans"
+        headers = {
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json"
+        }
+
+        try:
+            # Send the POST request to create an account plan
+            response = requests.post(account_plan_url, headers=headers, json=payload)
+            response.raise_for_status()
+
+            # Log and return the successful response
+            logger.info("Account plan created successfully: %s", response.json())
+            return response.json()
+
+        except requests.RequestException as e:
+            status_code = response.status_code if response else "N/A"
+            error_content = response.text if response else "No response content"
+
+            # Log error details
+            logger.error(
+                "Failed to create account plan.\n"
+                "Status Code: %s\nPayload: %s\nResponse: %s\nError: %s",
+                status_code, payload, error_content, str(e)
+            )
+
+            # Raise an exception with details
+            raise Exception(f"Failed to create account plan: {str(e)} (Status Code: {status_code})") from e

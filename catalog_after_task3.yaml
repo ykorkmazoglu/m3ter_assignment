@@ -88,42 +88,39 @@ Pricing:
     fixedPrice: 0.0
     unitPrice: 0.22
   id: 23fea231-307b-4e41-8018-4a1bc257b5c6
-
-# Task 3
 Account:
-  - name: "Mickey Mouse Inc API 2" #update
-    code: "mickey_mouse_inc_api_2" #update
-    address:
-      addressLine1: "1235 E Higgins Rd"
-      locality: "Schaumburg"
-      region: "IL"
-      postCode: "60007"
-      country: "US"
-    emailAddress: "billing@yakupdemo.com"
-
-  - name: "Donald Duck Ltd API 2" #update
-    code: "donald_duck_ltd_api_2" #update
-    address:
-      addressLine1: "1235 E Higgins Rd"
-      locality: "Schaumburg"
-      region: "IL"
-      postCode: "60007"
-      country: "US"
-    emailAddress: "billing@yakupdemo.com"
-
-  - name: "Pluto LLP API 2" #update
-    code: "pluto_llp_api_2" #update
-    address:
-      addressLine1: "1235 E Higgins Rd"
-      locality: "Schaumburg"
-      region: "IL"
-      postCode: "60007"
-      country: "US"
-    emailAddress: "billing@yakupdemo.com"
-  
-  
+- name: Mickey Mouse Inc API 2
+  code: mickey_mouse_inc_api_2
+  address:
+    addressLine1: 1235 E Higgins Rd
+    locality: Schaumburg
+    region: IL
+    postCode: '60007'
+    country: US
+  emailAddress: billing@yakupdemo.com
+  id: 2e2f7b1c-b192-4ef1-a9cf-b2077fe2a004
+- name: Donald Duck Ltd API 2
+  code: donald_duck_ltd_api_2
+  address:
+    addressLine1: 1235 E Higgins Rd
+    locality: Schaumburg
+    region: IL
+    postCode: '60007'
+    country: US
+  emailAddress: billing@yakupdemo.com
+  id: da078173-ac45-443f-8d2e-45b17d325aee
+- name: Pluto LLP API 2
+  code: pluto_llp_api_2
+  address:
+    addressLine1: 1235 E Higgins Rd
+    locality: Schaumburg
+    region: IL
+    postCode: '60007'
+    country: US
+  emailAddress: billing@yakupdemo.com
+  id: 03ad3437-507b-4b6b-a973-3d0875d4ff78
 AccountPlan:
-  accountId: null
-  planId: null
-  startDate: "2024-12-01T00:00:00.000Z"
-  childBillingMode: "PARENT_BREAKDOWN"
+  accountId: 03ad3437-507b-4b6b-a973-3d0875d4ff78
+  planId: 87bda8f7-347d-4b2e-98c0-e4bc960087df
+  startDate: '2024-12-01T00:00:00.000Z'
+  childBillingMode: PARENT_BREAKDOWN

@@ -91,9 +91,9 @@ Pricing:
         unitPrice: 0.22
 
 # Task 3
-Customer:
-  - name: "Mickey Mouse Inc API 1" #update
-    code: "mickey_mouse_inc_api_1" #update
+Account:
+  - name: "Mickey Mouse Inc API 2" #update
+    code: "mickey_mouse_inc_api_2" #update
     address:
       addressLine1: "1235 E Higgins Rd"
       locality: "Schaumburg"
@@ -102,8 +102,8 @@ Customer:
       country: "US"
     emailAddress: "billing@yakupdemo.com"
 
-  - name: "Donald Duck Ltd API 1" #update
-    code: "donald_duck_ltd_api_1" #update
+  - name: "Donald Duck Ltd API 2" #update
+    code: "donald_duck_ltd_api_2" #update
     address:
       addressLine1: "1235 E Higgins Rd"
       locality: "Schaumburg"
@@ -112,8 +112,8 @@ Customer:
       country: "US"
     emailAddress: "billing@yakupdemo.com"
 
-  - name: "Pluto LLP API 1" #update
-    code: "pluto_llp_api_1" #update
+  - name: "Pluto LLP API 2" #update
+    code: "pluto_llp_api_2" #update
     address:
       addressLine1: "1235 E Higgins Rd"
       locality: "Schaumburg"
@@ -123,4 +123,10 @@ Customer:
     emailAddress: "billing@yakupdemo.com"
   
   
+AccountPlan:
+  accountId: null
+  planId: null
+  startDate: "2024-12-01T00:00:00.000Z"
+  childBillingMode: "PARENT_BREAKDOWN"
+
 

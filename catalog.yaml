@@ -94,7 +94,7 @@ Pricing:
         unitPrice: 0.22
 
 # Task 3
-Customer:
+Account:
   - name: "Mickey Mouse Inc API 2" #update
     code: "mickey_mouse_inc_api_2" #update
     address:
@@ -125,5 +125,19 @@ Customer:
       country: "US"
     emailAddress: "billing@yakupdemo.com"
   
-  
+AccountPlan:
+  accountId: null
+  planId: null
+  startDate: "2024-12-01T00:00:00.000Z"
+  childBillingMode: "PARENT_BREAKDOWN"
 
+
+  # Task 4
+  Measurement:
+  - uid: null
+    meter: null
+    account: null
+    ts: "2024-12-12T20:36:00.000Z"
+    measure:
+      memory_consumption_api_2: 32
+      execution_time_api_2: 1600
