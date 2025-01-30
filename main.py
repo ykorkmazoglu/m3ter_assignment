@@ -1,5 +1,10 @@
+import copy
 import logging
+import random
+import uuid
+from datetime import datetime, timedelta
 from pprint import pprint
+from typing import Any, Dict
 
 import yaml
 
@@ -31,7 +36,44 @@ def create_pricing_payload(catalog):
         # Update the aggregationId based on the description keyword
         pricing["aggregationId"] = aggregation_map.get(description)
 
+def generate_random_timestamp(start: str, end: str) -> str:
+    """
+    Generates a random timestamp between the given start and end date strings.
+    """
+    start = datetime.strptime("2024-12-01T00:00:00.000Z", "%Y-%m-%dT%H:%M:%S.%fZ")
+    end = datetime.strptime("2024-12-31T20:00:00.000Z", "%Y-%m-%dT%H:%M:%S.%fZ")
+    delta = end - start
+    random_seconds = random.randint(0, int(delta.total_seconds()))
+    ts = (start + timedelta(seconds=random_seconds)).strftime("%Y-%m-%dT%H:%M:%S.%fZ")
+    return ts
+
+def generate_measurements_payload(meter_code: str, account_code: str, start_ts: str, end_ts: str, size: int) -> Dict[str, Any]:
+    """
+    Generates a payload with a list of random measurements.
     
+    Parameters:
+    - size (int): The number of measurement objects to generate.
+    
+    Returns:
+    - Dict[str, Any]: A payload with a list of random measurements.
+    """
+    measurements = []
+    for _ in range(size):
+        measurement = {
+            "uid": str(uuid.uuid4()),
+            "meter": meter_code,
+            "account": account_code,
+            "ts": generate_random_timestamp(start_ts, end_ts),
+            # update aggregation codes suffix before you run
+            "measure": {
+                "memory_consumption_api_2": random.randint(1, 100),
+                "execution_time_api_2": random.randint(1000, 5000)
+            }
+        }
+        measurements.append(measurement)
+
+    return {"measurements": measurements}
+
 
 def task1 () -> None:
     try:
@@ -181,10 +223,65 @@ def task3() -> None:
     except Exception as e:
         logger.error("Error: %s", e)
 
+def task4() -> None:
+    try:
+        # Load catalog data
+        with open("catalog_after_task3.yaml", "r") as file:
+            catalog = yaml.safe_load(file)
+        
+        # Initialize client
+        client = M3terApiClient(access_key=config.access_key, api_secret=config.api_secret, org_id=config.org_id)
+        # Authenticate
+        client.authenticate()
+
+
+        start_ts = "2024-12-01T00:00:00.000Z"
+        end_ts = "2024-12-31T20:00:00.000Z"
+        meter_code = catalog["Meter"]["code"]
+        accounts = catalog["Account"]
+        
+        size=120
+        for account in accounts:
+            account_code = account["code"]
+            measurements = generate_measurements_payload(meter_code, account_code, start_ts, end_ts, size)
+            client.ingest_usage(payload=measurements)
+
+
+        # account_code = catalog["Meter"]["code"]
+        # memory_consumption_aggregation_code = catalog["Meter"]["code"]
+        # execution_time_aggregation_code = catalog["Meter"]["code"]
+
+        # "2024-12-01T00:00:00.000Z", "2024-12-31T20:00:00.000Z"
+        # pprint()
+
+
+        # # Create Accounts and AccountPlans
+        # # Extract the list of customers from the YAML
+        
+        # catalog["AccountPlan"]["planId"] = catalog["Plan"]["id"]
+        # account_plan_payload = catalog["AccountPlan"]
+
+       
+
+
+
+        # with open("catalog_after_task3.yaml", "w") as file:
+        #     yaml.safe_dump(catalog, file, default_flow_style=False, sort_keys=False)
+
+        # print('\n\n')
+        # pprint(accounts)
+        # print('\n\n')
+
+    except AuthenticationError as auth_err:
+        logger.error("Authentication Error: %s", auth_err)
+    except Exception as e:
+        logger.error("Error: %s", e)
+
 
 if __name__ == "__main__":
 
     # task1()
     # task2()
-    task3()
+    # task3()
+    task4()
     

@@ -327,3 +327,41 @@ class M3terApiClient:
 
             # Raise an exception with details
             raise Exception(f"Failed to create account plan: {str(e)} (Status Code: {status_code})") from e
+
+    # Task 4
+    def ingest_usage(self, payload: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Submits usage data to the Measurements API.
+        The payload must include the 'measurements' field with necessary usage details.
+        """
+        if not self.token:
+            raise Exception("Not authenticated. Call authenticate() first.")
+
+        usage_url = f"{self.ingest_url}/organizations/{self.org_id}/measurements"
+        headers = {
+            "Authorization": f"Bearer {self.token}",
+            "Content-Type": "application/json"
+        }
+
+        try:
+            # Send the POST request to submit usage data
+            response = requests.post(usage_url, headers=headers, json=payload)
+            response.raise_for_status()
+
+            # Log and return the successful response
+            logger.info("Usage data submitted successfully: %s", response.json())
+            return response.json()
+
+        except requests.RequestException as e:
+            status_code = response.status_code if response else "N/A"
+            error_content = response.text if response else "No response content"
+
+            # Log error details
+            logger.error(
+                "Failed to submit usage data.\n"
+                "Status Code: %s\nPayload: %s\nResponse: %s\nError: %s",
+                status_code, payload, error_content, str(e)
+            )
+
+            # Raise an exception with details
+            raise Exception(f"Failed to submit usage data: {str(e)} (Status Code: {status_code})") from e

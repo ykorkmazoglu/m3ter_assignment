@@ -124,3 +124,12 @@ AccountPlan:
   planId: 87bda8f7-347d-4b2e-98c0-e4bc960087df
   startDate: '2024-12-01T00:00:00.000Z'
   childBillingMode: PARENT_BREAKDOWN
+# Task 4
+  Measurement:
+  - uid: null
+    meter: null
+    account: null
+    ts: "2024-12-12T20:36:00.000Z"
+    measure:
+      memory_consumption_api_2: 32  #update
+      execution_time_api_2: 1600    #update

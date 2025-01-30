@@ -139,5 +139,5 @@ AccountPlan:
     account: null
     ts: "2024-12-12T20:36:00.000Z"
     measure:
-      memory_consumption_api_2: 32
-      execution_time_api_2: 1600
+      memory_consumption_api_2: 32  #update
+      execution_time_api_2: 1600    #update
