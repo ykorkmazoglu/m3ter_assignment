@@ -1,4 +1,4 @@
-config_api.txt
+
 # Ignore the virtual environment folder
 venv/
 
@@ -8,6 +8,8 @@ __pycache__/
 
 # Ignore local configuration files
 .env
-response.json
-
+.vscode/
 test/
+mock_data_after_task1.yaml
+mock_data_after_task2.yaml
+mock_data_after_task3.yaml
