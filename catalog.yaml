@@ -1,0 +1,52 @@
+
+Product:
+  name: "AWS Lambda API 2"  #update
+  code: "aws_lambda_api_2"  #update
+
+
+Meter:
+  productId: null
+  name: "Compute and Requests Meter API 2"  #update
+  code: "compute_and_requests_meter_api_2"  #update
+
+  dataFields:
+    - name: "Memory Consumption API 2"  #update
+      code: "memory_consumption_api_2"  #update
+      category: "MEASURE"
+      unit: "GB"
+   
+    - name: "Execution Time API 2"  #update
+      code: "execution_time_api_2"  #update
+      category: "MEASURE"
+      unit: "seconds"
+
+  derivedFields:
+    - name: "Duration API 2"  #update
+      code: "duration_api_2"  #update
+      category: "MEASURE"
+      unit: "GB-seconds"
+      calculation: "memory_consumption_api_2*execution_time_api_2"  #update
+
+
+Aggregation:
+  - name: "Total Number of Requests API 2"  #update
+    code: "total_number_of_requests_api_2"  #update
+    rounding: "NONE"
+    quantityPerUnit: 1000000
+    unit: "Requests"
+    targetField: "memory_consumption_api_2"  #update
+    aggregation: "COUNT"
+  
+  - name: "Duration Aggregation API 2"  #update
+    code: "duration_aggregation_api_2"  #update
+    rounding: "NONE"
+    quantityPerUnit: 1
+    unit: "GB-seconds"
+    targetField: "duration_api_2"  #update
+    aggregation: "SUM"
+
+  
+  
+  
+  
+
