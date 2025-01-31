@@ -1,58 +1,58 @@
 # Please update the suffix for lines that have #update next to them.
 # Some fields must be unique, so for each run, ensure you increment the suffix accordingly.
-# Find replace: both 'API 2' and 'api_2' with 'API 3' and 'api_3'
+# Find replace: both 'API 2' and 'api_2' with 'API 6' and 'api_6'
 
 # Task 1
 Product:
-  name: "AWS Lambda API 3"  #update
-  code: "aws_lambda_api_3"  #update
+  name: "AWS Lambda API 6"  #update
+  code: "aws_lambda_api_6"  #update
 
 Meter:
   productId: null
-  name: "Compute and Requests Meter API 3"  #update
-  code: "compute_and_requests_meter_api_3"  #update
+  name: "Compute and Requests Meter API 6"  #update
+  code: "compute_and_requests_meter_api_6"  #update
 
   dataFields:
-    - name: "Memory Consumption API 3"  #update
-      code: "memory_consumption_api_3"  #update
+    - name: "Memory Consumption API 6"  #update
+      code: "memory_consumption_api_6"  #update
       category: "MEASURE"
       unit: "GB"
    
-    - name: "Execution Time API 3"  #update
-      code: "execution_time_api_3"  #update
+    - name: "Execution Time API 6"  #update
+      code: "execution_time_api_6"  #update
       category: "MEASURE"
       unit: "seconds"
 
   derivedFields:
-    - name: "Duration API 3"  #update
-      code: "duration_api_3"  #update
+    - name: "Duration API 6"  #update
+      code: "duration_api_6"  #update
       category: "MEASURE"
       unit: "GB-seconds"
-      calculation: "memory_consumption_api_3*execution_time_api_3"  #update
+      calculation: "memory_consumption_api_6*execution_time_api_6"  #update
 
 Aggregation:
-  - name: "Total Number of Requests API 3"  #update
-    code: "total_number_of_requests_api_3"  #update
+  - name: "Total Number of Requests API 6"  #update
+    code: "total_number_of_requests_api_6"  #update
     rounding: "NONE"
     quantityPerUnit: 1000000
     unit: "Requests"
-    targetField: "memory_consumption_api_3"  #update
+    targetField: "memory_consumption_api_6"  #update
     aggregation: "COUNT"
     meterId: null
   
-  - name: "Duration Aggregation API 3"  #update
-    code: "duration_aggregation_api_3"  #update
+  - name: "Duration Aggregation API 6"  #update
+    code: "duration_aggregation_api_6"  #update
     rounding: "NONE"
     quantityPerUnit: 1
     unit: "GB-seconds"
-    targetField: "duration_api_3"  #update
+    targetField: "duration_api_6"  #update
     aggregation: "SUM"
     meterId: null
 
 # Task 2
 PlanTemplate:
-  name: "Lambda Template API 3" #update
-  code: "lambda_template_api_3" #update
+  name: "Lambda Template API 6" #update
+  code: "lambda_template_api_6" #update
   currency: "USD"
   standingCharge: 0.0
   billFrequencyInterval: 1
@@ -61,8 +61,8 @@ PlanTemplate:
 
 Plan:
   planTemplateId: null
-  name: "Lambda Plan API 3" #update
-  code: "lambda_plan_api_3" #update
+  name: "Lambda Plan API 6" #update
+  code: "lambda_plan_api_6" #update
 
 Pricing:
   - aggregationId: null
@@ -99,8 +99,8 @@ Pricing:
 
 # Task 3
 Account:
-  - name: "Mickey Mouse Inc API 3" #update
-    code: "mickey_mouse_inc_api_3" #update
+  - name: "Mickey Mouse Inc API 6" #update
+    code: "mickey_mouse_inc_api_6" #update
     address:
       addressLine1: "1235 E Higgins Rd"
       locality: "Schaumburg"
@@ -109,8 +109,8 @@ Account:
       country: "US"
     emailAddress: "billing@yakupdemo.com"
 
-  - name: "Donald Duck Ltd API 3" #update
-    code: "donald_duck_ltd_api_3" #update
+  - name: "Donald Duck Ltd API 6" #update
+    code: "donald_duck_ltd_api_6" #update
     address:
       addressLine1: "1235 E Higgins Rd"
       locality: "Schaumburg"
@@ -119,8 +119,8 @@ Account:
       country: "US"
     emailAddress: "billing@yakupdemo.com"
 
-  - name: "Pluto LLP API 3" #update
-    code: "pluto_llp_api_3" #update
+  - name: "Pluto LLP API 6" #update
+    code: "pluto_llp_api_6" #update
     address:
       addressLine1: "1235 E Higgins Rd"
       locality: "Schaumburg"
@@ -143,5 +143,5 @@ AccountPlan:
     account: null
     ts: "2024-12-12T20:36:00.000Z"
     measure:
-      memory_consumption_api_3: 32  #update
-      execution_time_api_3: 1600    #update
+      memory_consumption_api_6: 32  #update
+      execution_time_api_6: 1600    #update

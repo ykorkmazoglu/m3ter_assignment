@@ -10,6 +10,7 @@
 
 2. **Update Mock Data**  
    Navigate to the `mock_data.yaml` file and update the suffix for any lines marked with `#update` (e.g., `API 2`, `api_2`). This is to ensure unique names for each run.
+   The suffix is set to "API 6". You can do the first run without updating this file.
 
 3. ** API Credentials**  
    In `config.py`, you'll find `access_key`, `api_secret`, and `org_id`.
