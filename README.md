@@ -87,6 +87,7 @@
 
 #### **Task 5: Billing and Invoice Generation**
 - Run **Billing** in the UI to generate and view invoices.
+- Invoice Date: 01 / 01 / 2025. Usage is posted for December
 
 ---
 
